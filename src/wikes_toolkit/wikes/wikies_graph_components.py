@@ -93,10 +93,12 @@ class WikiTriple(Triple):
         return f"Triple(({self.subject_entity.identifier})-[{self.predicate.predicate_id}]->({self.object_entity.identifier})"
 
     def __eq__(self, other):
+        if not isinstance(other, WikiTriple):
+            return False
         return (
-                self.subject_entity.identifier == other.subject_entity.id
+                self.subject_entity.identifier == other.subject_entity.identifier
                 and self.predicate.predicate_id == other.predicate.predicate_id
-                and self.object_entity.identifier == other.object_entity.id
+                and self.object_entity.identifier == other.object_entity.identifier
         )
 
     def __hash__(self):
